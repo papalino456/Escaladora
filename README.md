@@ -7,7 +7,11 @@
 - **Bluetooth + WiFi**
 - **IoT stat tracking**
 - **Machine ID auth + name change**
-- **Competitive scores and communities (Gamification)**
+- **Gamification**
+    - Competitive scores/ranks
+    - Communities/friends
+    - Achievements
+    - Unlockable personalization/avatars
 - QR code for data/image generation and sharing
 - Smart devices connectivity (wrist bands and the likes)
 - Registering data to common health apps such as google fit
@@ -27,3 +31,9 @@ We plan to achieve user auth via machine ID, thus circunventing the hassle of si
 - Heart rate sensor
 - Infrared reflective sensor
 - Resistance control ??
+
+### System Framework
+- Server to host a React page and data management backend with nodeJS & Express
+- Python client in the machine to send data through http requests and show webpage in borderless "browser"
+- Webpage page may be accessed through other devices or app
+- MERN/FERN Stack + http data logging
