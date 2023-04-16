@@ -18,7 +18,7 @@ const heartRateData = [
   
   export default function GraphSection() {
     return (
-      <div className="flex flex-col items-center justify-center h-full w-72 bg-gradient-to-br from-pink-500 to-yellow-500 ">
+      <div className="flex flex-col items-center justify-center h-full ml-auto bg-gradient-to-br from-pink-500 to-yellow-500 " style={{width: "28%"}}>
         <div className="w-11/12 h-2/5 p-4 rounded-lg mb-4 bg-opacity-60 bg-white backdrop-blur-xl shadow-lg border border-white-300">
             <h1 className="text-2xl font-bold text-black">Heart Rate</h1>
           <Graph
@@ -34,7 +34,7 @@ const heartRateData = [
           <Graph
             data={speedData}
             dataKey="value"
-            stroke="#0000FF"
+            stroke="#7000FF"
             stroke2="#00AEFF"
             areaColor="speedGradient"
           />
