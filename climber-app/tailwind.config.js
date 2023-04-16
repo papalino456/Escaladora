@@ -14,7 +14,7 @@ export default {
       },
       fontFamily: {
         poppins: ['Poppins', 'sans-serif'],
-        adelia: ["ADELIA", "cursive"],
+        VenusRising: ["Venus Rising", "cursive"],
       },
     },
   },

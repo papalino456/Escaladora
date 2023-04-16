@@ -3,6 +3,6 @@
 @import 'tailwindcss/utilities';
 
 @font-face {
-  font-family: "Venus Rising";
+  font-family: "VenusRising";
   src: url("../src/assets/venus_rising_rg.otf");
 }
