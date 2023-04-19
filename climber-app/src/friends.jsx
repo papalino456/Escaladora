@@ -2,7 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 import './index.css'
 import SideBar from './components/sideBar'
-
+import friend from './components/friendLeaderBoard'
 
 
 
@@ -12,8 +12,8 @@ ReactDOM.createRoot(document.getElementById('root')).render(
         return(
       <div className="flex flex-row h-screen w-screen">
         <SideBar />
+        <friend />
         <MainSection />
-        <GraphSection />
       </div>
         )
     </React.StrictMode>,
