@@ -4,30 +4,9 @@ import { HeartIcon, BoltIcon } from '@heroicons/react/24/outline';
 
 // Dummy data for demonstration purposes
 const heartRateData = [
-    { name: '1', value: 95 },
-    { name: '2', value: 90 },
-    { name: '3', value: 120 },
-    { name: '4', value: 90 },
-    { name: '5', value: 110 },
-    { name: '6', value: 110 },
-    { name: '7', value: 115 },
-    { name: '8', value: 110 },
-    { name: '9', value: 130 },
-    { name: '10', value: 110 },
-
   ];
   
   const speedData = [
-    { name: '1', value: 20 },
-    { name: '2', value: 25 },
-    { name: '3', value: 23 },
-    { name: '4', value: 22 },
-    { name: '5', value: 24 },
-    { name: '6', value: 25 },
-    { name: '7', value: 23 },
-    { name: '8', value: 22 },
-    { name: '9', value: 23 },
-    { name: '10', value: 23 },
   ];
   
   export default function GraphSection() {

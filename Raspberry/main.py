@@ -3,17 +3,29 @@ import time
 from datetime import datetime
 
 backend_url = "http://localhost:5000"
+USER_ID = '1'
+exercise_id = None
 
 def send_exercise_data(exercise_data):
-    response = requests.post(f"{backend_url}/api/sensorData", json=exercise_data)
+    global exercise_id
 
-    if response.status_code == 200:
-        print("Exercise data sent successfully")
-        return response.text
-    
+    if exercise_id is None:
+        response = requests.post(f"{backend_url}/api/sensorData", json=exercise_data)
+
+        if response.status_code == 200:
+            exercise_id = response.text
+            print("Exercise data sent successfully, received exercise ID:", exercise_id)
+        else:
+            print(f"Error sending exercise data: {response.status_code}")
+
     else:
-        print(f"Error sending exercise data: {response.status_code}")
-        return None
+        exercise_data["exerciseID"] = exercise_id
+        response = requests.put(f"{backend_url}/api/sensorData/{exercise_id}", json=exercise_data)
+
+        if response.status_code == 200:
+            print("Exercise data updated successfully")
+        else:
+            print(f"Error updating exercise data: {response.status_code}")
 
 def calculate_exercise_data(sensor_data_list):
     # Replace this function with actual calculations based on the sensor data
@@ -24,8 +36,13 @@ def calculate_exercise_data(sensor_data_list):
     top_heart_rate = max([data['heart_rate'] for data in sensor_data_list]) 
     distance = speed * duration
     date = datetime.now().isoformat()
+    global exercise_id
+    if not exercise_id:
+        exercise_id = f"exerciseID_{time.time()}"
 
     exercise_data = {
+        "exerciseID": exercise_id,
+        "userID": USER_ID,
         "duration": duration,
         "caloriesBurnt": calories_burnt,
         "topSpeed": top_speed,
@@ -55,6 +72,8 @@ def get_exercise_status():
         print(f"Error getting exercise status: {response.status_code}")
         return None
 
+
+
 if __name__ == "__main__":
     sensor_data_list = []
 
@@ -71,6 +90,8 @@ if __name__ == "__main__":
             sensor_data_list.append(sensor_data)
 
             exercise_data = calculate_exercise_data(sensor_data_list)
+            if exercise_id:
+                exercise_data["exerciseID"] = exercise_id
             print(f"Sending exercise data: {exercise_data}")
 
             response_data = send_exercise_data(exercise_data)
@@ -79,6 +100,7 @@ if __name__ == "__main__":
                 print(f"Received response: {response_data}")
         else:
             sensor_data_list = []
+            exercise_id = None
             print("Exercise not started yet")
 
         time.sleep(1)

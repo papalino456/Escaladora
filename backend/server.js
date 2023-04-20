@@ -44,27 +44,23 @@ app.get('/api/exerciseStatus', (req, res) => {
 });
 
 
-app.post("/api/sensorData", async (req, res) => {
+app.put("/api/sensorData/:exerciseId", async (req, res) => {
   // Handle sensor data from Raspberry Pi
-  // Perform necessary calculations for speed, calories, etc.
   // Write the data to the Firebase database
 
-  // Example: writing exercise data for a user
-
   const exerciseData = req.body;
+  const userId = exerciseData.userID;
+  const exerciseId = req.params.exerciseId;
 
   // Save the exercise data to the database
-
-  const userId = "userID_1";
-  const exerciseId = "exerciseID_1";
   await db
-    .collection("users")
-    .doc(userId)
-    .collection("exercises")
-    .doc(exerciseId)
-    .set(exerciseData);
+  .collection("users")
+  .doc(userId)
+  .collection("exercises")
+  .doc(exerciseId)
+  .set(exerciseData);
 
-  res.sendStatus(200);
+res.sendStatus(200);
 });
 
 app.get("/api/exercises/:userId", async (req, res) => {

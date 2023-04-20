@@ -1,8 +1,7 @@
 import {React, useEffect, useState} from 'react';
 import { UserCircleIcon } from '@heroicons/react/24/outline'; '@heroicons/react/24/outline';
 import db from  '../firebase';
-import { collection, doc, onSnapshot } from 'firebase/firestore';
-
+import { collection, doc, onSnapshot, query, orderBy, limit } from 'firebase/firestore';
 
 async function startExercise() {
   try {
@@ -34,23 +33,31 @@ export default function MainSection() {
   const [isExercising, setIsExercising] = useState(false);
   const [duration, setDuration] = useState(0);
   const [caloriesBurnt, setCaloriesBurnt] = useState(0);
+  const [topSpeed, setTopSpeed] = useState(0);
+  const [topHeartRate, setTopHeartRate] = useState(0);
+  const [distance, setDistance] = useState(0);
 
   // Replace this with the actual user ID and exercise ID
-  const userId = "userID_1";
-  const exerciseId = "exerciseID_1";
+  const userId = "1";
+  const [exerciseId, setExerciseId] = useState(null);
 
   useEffect(() => {
-    const unsubscribe = onSnapshot(
-      doc(collection(db, "users", userId, "exercises"), exerciseId),
-      (doc) => {
-        if (doc.exists()) {
+    const userExercisesRef = collection(db, "users", userId, "exercises");
+    const q = query(userExercisesRef, orderBy("date", "desc"), limit(1));
+    const unsubscribe = onSnapshot(q, (querySnapshot) => {
+      querySnapshot.forEach((doc) => {
+        if (doc.exists) {
           const data = doc.data();
           setDuration(data.duration);
           setCaloriesBurnt(data.caloriesBurnt);
+          setTopSpeed(data.topSpeed);
+          setTopHeartRate(data.topHeartRate);
+          setDistance(data.distance);
+          setExerciseId(doc.id);
         }
-      }
-    );
-  
+      });
+    });
+
     return () => {
       unsubscribe();
     };
@@ -59,12 +66,12 @@ export default function MainSection() {
   const handleStartStopExercise = async () => {
     if (isExercising) {
       // Calculate exercise data here, comes from db
-      const exerciseData = {
+        const exerciseData = {
         duration,
         caloriesBurnt,
-        topSpeed: 10, // Replace with the actual value
-        topHeartRate: 120, // Replace with the actual value
-        distance: 500, // Replace with the actual value
+        topSpeed,
+        topHeartRate,
+        distance,
         date: new Date(),
       };
   
