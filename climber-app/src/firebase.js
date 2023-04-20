@@ -1,21 +1,17 @@
-import firebase from 'firebase/app';
-import 'firebase/firestore';
-import 'firebase/auth';
-import 'firebase/storage'; // If you need Firebase Storage
+import { initializeApp } from "firebase/app";
+import { getFirestore } from "firebase/firestore";
 
 const firebaseConfig = {
-  apiKey: 'YOUR_API_KEY',
-  authDomain: 'YOUR_AUTH_DOMAIN',
-  projectId: 'YOUR_PROJECT_ID',
-  storageBucket: 'YOUR_STORAGE_BUCKET',
-  messagingSenderId: 'YOUR_MESSAGING_SENDER_ID',
-  appId: 'YOUR_APP_ID',
+  apiKey: "AIzaSyADrScAFXM-Y4vZnp_EdvOl0HHx9PvckPw",
+  authDomain: "escaladora-7a02c.firebaseapp.com",
+  projectId: "escaladora-7a02c",
+  storageBucket: "escaladora-7a02c.appspot.com",
+  messagingSenderId: "612086172338",
+  appId: "1:612086172338:web:ba4c8d80861d8caba9d7ab",
+  measurementId: "G-3PQM2L2Q6B"
 };
 
-firebase.initializeApp(firebaseConfig);
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
 
-export const auth = firebase.auth();
-export const db = firebase.firestore();
-export const storage = firebase.storage(); // If you need Firebase Storage
-
-export default firebase;
+export default db;
