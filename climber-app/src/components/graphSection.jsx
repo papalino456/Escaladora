@@ -1,15 +1,52 @@
-import React from 'react';
+import { React, useState, useEffect } from 'react';
+import db from  '../firebase';
+import { collection, doc, onSnapshot, query, orderBy, limit } from 'firebase/firestore';
 import Graph from './graph';
 import { HeartIcon, BoltIcon } from '@heroicons/react/24/outline';
 
-// Dummy data for demonstration purposes
-const heartRateData = [
-  ];
-  
-  const speedData = [
-  ];
   
   export default function GraphSection() {
+    const [heartRate, setHeartRate] = useState([]);
+    const [speedList, setSpeedList] = useState([]);
+
+    const userId = "1";
+    const [exerciseId, setExerciseId] = useState(null);
+
+    useEffect(() => {
+      const userExercisesRef = collection(db, "users", userId, "exercises");
+      const q = query(userExercisesRef, orderBy("date", "desc"), limit(1));
+      const unsubscribe = onSnapshot(q, (querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+          if (doc.exists) {
+            const data = doc.data();
+            setExerciseId(doc.id);
+            setHeartRate((prevHeartRate) => {
+              const newHeartRate = prevHeartRate.concat(data.heartRateList);
+              return newHeartRate.slice(-10);
+            });
+            setSpeedList((prevSpeedList) => {
+              const newSpeedList = prevSpeedList.concat(data.speed);
+              return newSpeedList.slice(-10);
+            });
+          }
+        });
+      });
+    
+      return () => {
+        unsubscribe();
+      };
+    }, []);
+    
+
+    useEffect(() => {
+      setHeartRate([]);
+      setSpeedList([]);
+    }, [exerciseId]);
+
+    function formatData(dataArray) {
+      return dataArray.map((value, index) => ({ value, index }));
+    }
+
     return (
       <div className="flex flex-col items-center justify-center h-full ml-auto bg-cover overflow-hidden bg-[url('src/assets/mesh.png')] bg" style={{width: "28%"}}>
         <div className="w-11/12 h-2/5 pt-0 rounded-lg mb-4 bg-opacity-30 bg-white backdrop-blur-xl shadow-lg border border-white-300">
@@ -18,7 +55,7 @@ const heartRateData = [
             <h2 className="font-VenusRising text-xl">Heart Rate</h2>
             </div>
           <Graph
-            data={heartRateData}
+            data={formatData(heartRate)}
             dataKey="value"
             stroke="#FF0000"
             stroke2="#FF6400"
@@ -31,7 +68,7 @@ const heartRateData = [
             <h2 className="font-VenusRising text-xl">Velocity</h2>
             </div>          
           <Graph
-            data={speedData}
+            data={formatData(speedList)}
             dataKey="value"
             stroke="#7000FF"
             stroke2="#00AEFF"

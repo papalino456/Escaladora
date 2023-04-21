@@ -35,7 +35,9 @@ export default function MainSection() {
   const [caloriesBurnt, setCaloriesBurnt] = useState(0);
   const [topSpeed, setTopSpeed] = useState(0);
   const [topHeartRate, setTopHeartRate] = useState(0);
+  const [heartRate, setHeartRate] = useState([]);
   const [distance, setDistance] = useState(0);
+  const [speed, setSpeed] = useState(0);
 
   // Replace this with the actual user ID and exercise ID
   const userId = "1";
@@ -51,7 +53,9 @@ export default function MainSection() {
           setDuration(data.duration);
           setCaloriesBurnt(data.caloriesBurnt);
           setTopSpeed(data.topSpeed);
+          setSpeed(data.speed);
           setTopHeartRate(data.topHeartRate);
+          setHeartRate(data.heartRateList);
           setDistance(data.distance);
           setExerciseId(doc.id);
         }
@@ -70,7 +74,9 @@ export default function MainSection() {
         duration,
         caloriesBurnt,
         topSpeed,
+        speed,
         topHeartRate,
+        heartRate,
         distance,
         date: new Date(),
       };
@@ -88,10 +94,10 @@ export default function MainSection() {
         <h1 className='text-4xl font-bold mt-1 ml-8 font-VenusRising text-slate-900'>Dashboard</h1>
         <UserCircleIcon className='h-12 w-12 mr-4 text-slate-900 justify-items-center'/>
       </div>
-      <div>
-        <img src='src/assets/dsadasda.png' className='h-56 w-10/12 rounded-2xl mt-5 ml-8' ></img>
+      <div className="flex flex-col justify-center items-center mx-auto ">
+        <img src='src/assets/dsadasda.png' className='h-56 w-10/12 rounded-2xl mt-5' ></img>
       </div>
-      <div className='flex flex-row justify-evenly mt-20 mr-8'>
+      <div className='flex flex-row justify-evenly mt-12 '>
         <div className='flex flex-col justify-center text-center'>
           <h1 className='text-xl font-bold mt-1 font-VenusRising text-slate-900'>Time</h1>
           <h1 className='text-4xl font-bold mt-1 font-VenusRising text-slate-900'>{duration}</h1>
@@ -103,15 +109,17 @@ export default function MainSection() {
             <h1 className='text-sm font-bold mt-1 font-VenusRising text-slate-900'>Kcal</h1>
           </div>
         </div>
-        <div className="flex flex-col justify-center text-center">
+      </div>
+      <div className="flex flex-col justify-center text-center w-3/12 mx-auto mt-10">
           <button
             onClick={handleStartStopExercise}
-            className="bg-blue-600 text-white px-4 py-2 rounded-md"
+            className={`text-white font-bold px-4 py-2 rounded-lg shadow-lg ${
+              isExercising ? "bg-gradient-to-br from-red-500 to-rose-600" : "bg-gradient-to-br from-teal-400 to-blue-400 "
+            }`}
           >
             {isExercising ? "Stop Exercise" : "Start Exercise"}
           </button>
         </div>
-      </div>
     </div>
   );
 }

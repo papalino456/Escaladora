@@ -29,11 +29,12 @@ def send_exercise_data(exercise_data):
 
 def calculate_exercise_data(sensor_data_list):
     # Replace this function with actual calculations based on the sensor data
-    duration = len(sensor_data_list)  # Assuming 5 seconds interval between sensor readings #CHECK
+    duration = round(len(sensor_data_list) * 0.5, 1)  # Assuming 0.5 seconds interval between sensor readings #CHECK
     calories_burnt = sum([data['heart_rate'] for data in sensor_data_list]) / 100               #CHECK
-    speed = sum([data['infrared_data'] for data in sensor_data_list]) / len(sensor_data_list)   #CHECK
+    speed = sum([data['infrared_data'] for data in sensor_data_list]) / len(sensor_data_list)
     top_speed = max([speed for data in sensor_data_list])
-    top_heart_rate = max([data['heart_rate'] for data in sensor_data_list]) 
+    top_heart_rate = max([data['heart_rate'] for data in sensor_data_list])
+    heart_rate_list = [data['heart_rate'] for data in sensor_data_list]
     distance = speed * duration
     date = datetime.now().isoformat()
     global exercise_id
@@ -45,8 +46,10 @@ def calculate_exercise_data(sensor_data_list):
         "userID": USER_ID,
         "duration": duration,
         "caloriesBurnt": calories_burnt,
+        "speed": speed,
         "topSpeed": top_speed,
         "topHeartRate": top_heart_rate,
+        "heartRateList": heart_rate_list,
         "distance": distance,
         "date": date,
     }
@@ -103,4 +106,4 @@ if __name__ == "__main__":
             exercise_id = None
             print("Exercise not started yet")
 
-        time.sleep(1)
+        time.sleep(0.5)
