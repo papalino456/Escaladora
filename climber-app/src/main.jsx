@@ -6,7 +6,7 @@ import MainSection from './components/mainSection'
 import GraphSection from './components/graphSection'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import FriendsPage from './components/FriendsPage'
-import ProfileSection from './components/friendLeaderBoard'
+import ProfileSection from './components/profileSection'
 
 
 ReactDOM.createRoot(document.getElementById('root')).render(
