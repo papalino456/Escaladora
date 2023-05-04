@@ -95,7 +95,7 @@ export default function MainSection() {
         <UserCircleIcon className='h-12 w-12 mr-4 text-slate-900 justify-items-center'/>
       </div>
       <div className="flex flex-col justify-center items-center mx-auto ">
-        <img src='src/assets/dsadasda.png' className='h-56 w-10/12 rounded-2xl mt-5' ></img>
+        <img src='/assets/dsadasda.png' className='h-56 w-10/12 rounded-2xl mt-5' ></img>
       </div>
       <div className='flex flex-row justify-evenly mt-12 '>
         <div className='flex flex-col justify-center text-center'>

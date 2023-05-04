@@ -35,7 +35,7 @@ const FriendsPage = () => {
           <h1 className='text-4xl font-bold mt-1 ml-8 font-VenusRising text-slate-900'>Friends Page</h1> 
         </div>
         <div className="flex items-center justify-center " >
-          <img src='src\assets\profile.jpg' className='object-cover h-16 w-16 rounded-full mx-8 border-2 border-slate-700'></img>
+          <img src='\assets\profile.jpg' className='object-cover h-16 w-16 rounded-full mx-8 border-2 border-slate-700'></img>
         </div>
       </div>
       <div className='flex flex-auto rounded-md m-8 mt-0 '>

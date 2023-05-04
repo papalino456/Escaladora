@@ -6,7 +6,7 @@ export default function SideBar() {
   return (
     <div className="top-0 left-0 h-screen w-16 bg-white flex flex-col items-center pt-6">
       <div className="h-16 w-16 bg-white rounded mb-8">
-        <img src="src\assets\00004.png" alt="" className="h-full w-full rounded-full"></img>
+        <img src="\assets\00004.png" alt="" className="h-full w-full rounded-full"></img>
       </div>
       <nav className='flex flex-col mt-10'>
         <Link to="/" className="mb-6">

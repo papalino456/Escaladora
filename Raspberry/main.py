@@ -2,7 +2,7 @@ import requests
 import time
 from datetime import datetime
 
-backend_url = "http://localhost:5000"
+backend_url = "https://escaladora-tec.herokuapp.com"
 USER_ID = '1'
 exercise_id = None
 

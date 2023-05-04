@@ -16,11 +16,11 @@ const FriendPos = ({Usuario,calorias,distancia,velocidad}) => {
   const getBackgroundImage = () => {
     switch (selectedButtonIndex) {
       case 0:
-        return 'url("src/assets/mesh-gradient.png")';
+        return 'url("/assets/mesh-gradient.png")';
       case 1:
-        return 'url("src/assets/mesh-gradient-green.png")';
+        return 'url("/assets/mesh-gradient-green.png")';
       case 2:
-        return 'url("src/assets/mesh-gradient-amigos.png")';
+        return 'url("/assets/mesh-gradient-amigos.png")';
       default:
         return "";
     }
@@ -69,7 +69,7 @@ const FriendPos = ({Usuario,calorias,distancia,velocidad}) => {
         >      
         for
         <div className='grid grid-cols-8 grid-rows-3 grow h-16 rounded-md bg-opacity-30 bg-white backdrop-blur-xl shadow-lg border border-white-300 '>
-          <div className='row-start-1 row-span-2 min-h-16 max-w-12'><img src='src\assets\profile.jpg' className='object-cover mt-0.5 h-14 w-14 rounded-full ml-2 border-2 border-slate-700'></img></div>
+          <div className='row-start-1 row-span-2 min-h-16 max-w-12'><img src='\assets\profile.jpg' className='object-cover mt-0.5 h-14 w-14 rounded-full ml-2 border-2 border-slate-700'></img></div>
           <h1 className='row-start-2 min-h-14 font-VenusRising text-s'>{Usuario}:</h1>
           <h1 className="row-start-2 -ml-4 min-h-14">{actual || "Loading..."}</h1>
           <h1 className='row-start-2 -ml-4 min-h-14'>{actual || "Loading..."}</h1>
