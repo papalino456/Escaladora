@@ -5,7 +5,7 @@ import { collection, doc, onSnapshot, query, orderBy, limit } from 'firebase/fir
 
 async function startExercise() {
   try {
-    const response = await fetch('http://localhost:5000/api/startExercise', { method: 'POST' });
+    const response = await fetch('api/startExercise', { method: 'POST' });
     const data = await response.json();
     console.log(data.message);
   } catch (err) {
@@ -15,7 +15,7 @@ async function startExercise() {
 
 async function stopExercise(exerciseData) {
   try {
-    const response = await fetch('http://localhost:5000/api/stopExercise', {
+    const response = await fetch('/api/stopExercise', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
