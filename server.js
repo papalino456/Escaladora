@@ -7,8 +7,11 @@ const db = require(path.resolve(__dirname, "firebase.js"));
 const app = express();
 const PORT = process.env.PORT || 5000;
 
+const path = require("path")
 app.use(express.json());
 app.use(cors()); 
+app.use(express.static(path.join(__dirname, "client", "build")))
+
 let exerciseStarted = false;
 
 // Add your Express routes here
@@ -77,7 +80,7 @@ app.get("/api/exercises/:userId", async (req, res) => {
 });
 
 app.get("/", (req, res) => {
-  res.send("Hello World!");
+  res.sendFile(path.join(__dirname, "client", "build", "index.html"));
 });
 
 app.listen(PORT, () => {
