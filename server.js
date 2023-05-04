@@ -10,7 +10,7 @@ const PORT = process.env.PORT || 5000;
 const path = require("path")
 app.use(express.json());
 app.use(cors()); 
-app.use(express.static(path.join(__dirname, "client", "build")))
+app.use(express.static(path.join(__dirname, "client", "dist")))
 
 let exerciseStarted = false;
 
@@ -80,7 +80,7 @@ app.get("/api/exercises/:userId", async (req, res) => {
 });
 
 app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, "client", "build", "index.html"));
+  res.sendFile(path.join(__dirname, "client", "dist", "index.html"));
 });
 
 app.listen(PORT, () => {
