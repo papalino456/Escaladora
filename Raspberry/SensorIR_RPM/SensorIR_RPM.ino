@@ -1,11 +1,11 @@
-#include <LiquidCrystal.h> 
-#include "TimerOne.h"     
+#include <LiquidCrystal.h>    
 
 LiquidCrystal lcd(12,11, 6, 5, 4, 3); 
 const byte IR_SENSOR_PIN = 2;    
 const byte INTERRUPT_PIN = 0;    
 
 int BPM = 54;
+int rpm = 0;
 int revCountBuffer[10] = {0};
 int totalCount=0;
 int bufferIndex = 0;
@@ -34,16 +34,16 @@ void loop() {
         for (int i = 0; i < 10; i++) {
             sum += revCountBuffer[i];
         }
-        float rpm = sum * 6.0;  
+        rpm = sum * 6.0;  
         interrupts();
 
         lcd.setCursor(0,0);
         lcd.print(rpm);
         lcd.setCursor(0,1);
-        lcd.print(totalCount);
-
-        Serial.println(String(rpm)+","+String(BPM));
+        lcd.print(totalCount);        
     }
+    Serial.println(String(rpm)+","+String(BPM));
+    delay(500);
 }
 
 void revCountFunc() {
