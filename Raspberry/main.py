@@ -1,10 +1,15 @@
 import requests
+import serial
 import time
 from datetime import datetime
 
+ser = serial.Serial("COM7", 9600)
 backend_url = "https://escaladora-tec.herokuapp.com"
 USER_ID = '1'
 exercise_id = None
+buffer = []
+heart_rate = 0
+speed = 0
 
 def send_exercise_data(exercise_data):
     global exercise_id
@@ -31,8 +36,7 @@ def calculate_exercise_data(sensor_data_list):
     # Replace this function with actual calculations based on the sensor data
     duration = round(len(sensor_data_list) * 0.5, 1)  # Assuming 0.5 seconds interval between sensor readings #CHECK
     calories_burnt = sum([data['heart_rate'] for data in sensor_data_list]) / 100               #CHECK
-    speed = sum([data['infrared_data'] for data in sensor_data_list]) / len(sensor_data_list)
-    top_speed = max([speed for data in sensor_data_list])
+    top_speed = max([data['speed'] for data in sensor_data_list])
     top_heart_rate = max([data['heart_rate'] for data in sensor_data_list])
     heart_rate_list = [data['heart_rate'] for data in sensor_data_list]
     distance = speed * duration
@@ -56,14 +60,17 @@ def calculate_exercise_data(sensor_data_list):
 
     return exercise_data
 
-def get_mock_sensor_data():
-    # Replace this function with actual sensor reading code
-    import random
-
-    heart_rate = random.randint(60, 100)
-    infrared_data = random.randint(0, 1)
-
-    return heart_rate, infrared_data
+def get_mock_sensor_data(byte_stream):
+    # Convert list to string
+    str_data = "".join(byte_stream)
+    # Remove \n and \r
+    str_data = str_data.replace("\n", "").replace("\r", "")
+    # Split string into two numbers
+    str_data = str_data.split(",")
+    # Convert strings to floats
+    first_num = float(str_data[0])
+    second_num = float(str_data[1])
+    return first_num, second_num
 
 def get_exercise_status():
     response = requests.get(f"{backend_url}/api/exerciseStatus")
@@ -81,15 +88,22 @@ if __name__ == "__main__":
     sensor_data_list = []
 
     while True:
+        byte = ser.read()
+        byte_decoded = byte.decode("utf-8")
         exercise_started = get_exercise_status()
-
+        
         if exercise_started is None:
             print("Error checking exercise status")
         elif exercise_started:
-            heart_rate, infrared_data = get_mock_sensor_data()
-            print(f"Sensing sensor data: Heart rate={heart_rate}, Infrared data={infrared_data}")
-
-            sensor_data = {"heart_rate": heart_rate, "infrared_data": infrared_data}
+            if byte != b'\n':
+                buffer.append(byte_decoded)
+            else:
+                speed, heart_rate = get_mock_sensor_data(buffer)
+                buffer = []
+                print(f"Speed = {speed}")
+                print(f"Heart Rate = {heart_rate}")
+            print(f"Sensing sensor data: Heart rate={heart_rate}, Speed={speed}")
+            sensor_data = {"heart_rate": heart_rate, "speed": speed}
             sensor_data_list.append(sensor_data)
 
             exercise_data = calculate_exercise_data(sensor_data_list)
@@ -105,5 +119,3 @@ if __name__ == "__main__":
             sensor_data_list = []
             exercise_id = None
             print("Exercise not started yet")
-
-        time.sleep(0.5)
