@@ -1,4 +1,6 @@
 import React from 'react';
+import { PieChart, Pie, Sector, Cell, ResponsiveContainer } from 'recharts';
+
 import { AreaChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Area } from 'recharts';
 
 const Graph = ({ data, dataKey, stroke, stroke2, areaColor }) => {
