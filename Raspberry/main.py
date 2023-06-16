@@ -73,7 +73,6 @@ def calculate_exercise_data(sensor_data_list):
     top_speed = max([data['speed'] for data in sensor_data_list])
     top_heart_rate = max([data['heart_rate'] for data in sensor_data_list])
     heart_rate_list = [data['heart_rate'] for data in sensor_data_list]
-    distance = speed * duration
     date = datetime.now().isoformat()
     global exercise_id
     if not exercise_id:
@@ -101,12 +100,14 @@ def get_mock_sensor_data(byte_stream):
     try:
         first_num = int(str_data[0]) if str_data[0] != '' else None
         second_num = int(str_data[1]) if str_data[1] != '' else None
+        third_num = int(str_data[2]) if str_data[2] != '' else None
         print(f"Speed = {first_num}")
         print(f"Heart Rate = {second_num}")
-        return first_num, second_num
+        print(f"Distance = {third_num}")
+        return first_num, second_num, third_num
     except IndexError:
         print("Invalid data received: Not enough values to unpack")
-        return 0,0
+        return 0,0,0
 
 def get_exercise_status():
     response = requests.get(f"{backend_url}/api/exerciseStatus")
@@ -140,10 +141,10 @@ if __name__ == "__main__":
             if byte_decoded != '\n':
                 buffer.append(byte_decoded)
             else:
-                speed, heart_rate = get_mock_sensor_data(buffer)
+                speed, heart_rate, distance = get_mock_sensor_data(buffer)
                 buffer = []
                 
-            sensor_data = {"heart_rate": heart_rate, "speed": speed}
+            sensor_data = {"heart_rate": heart_rate, "speed": speed, "distance": distance}
             sensor_data_list.append(sensor_data)
             
             calculate_and_send_data_thread(sensor_data_list)

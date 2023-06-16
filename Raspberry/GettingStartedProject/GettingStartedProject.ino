@@ -17,7 +17,7 @@ int IR;
 int IRcounts[60] = {0};
 int IRcount = 0;
 int totalIRCount = 0;
-
+int steps = 0;
 
 
 ExponentialFilter<float> FilteredSignal(20,0);
@@ -76,6 +76,7 @@ void loop() {
 
   if (IR == 1 && prevIR != 1) {
     IRcount++;
+    steps++;
   }
   prevIR = IR;
 
@@ -102,7 +103,7 @@ void loop() {
     lastSecond = millis();
     secondIndex = (secondIndex + 1) % 60;  // Move the index forward, wrapping around if necessary
 
-    Serial.println(String(totalIRCount)+","+String(totalPeakCount)); //send to serial port
+    Serial.println(String(totalIRCount)+","+String(totalPeakCount)+","+String(steps)); //send to serial port
     
   }
 
