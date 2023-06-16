@@ -37,10 +37,9 @@ void setup() {
 // The Main Loop Function
 void loop() {
 
-  float Signal = analogRead(PulseSensorPurplePin);  // Read the PulseSensor's value.
+  float Signal = analogRead(PulseSensorPurplePin);
   FilteredSignal.Filter(Signal);
   float SmoothSignal = FilteredSignal.Current();
-  long mapped = map(SmoothSignal,300.0,800.0,0.0,10.0);
   long amplified = SmoothSignal*100 - 35000;
   peakDetection.add(amplified);
   int peak = (peakDetection.getPeak()*10000);
