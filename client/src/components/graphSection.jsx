@@ -50,10 +50,10 @@ import { HeartIcon, BoltIcon } from '@heroicons/react/24/outline';
     return (
       <div className="flex flex-col items-center justify-center h-full ml-auto bg-cover overflow-hidden bg-[url('/assets/mesh.png')] bg" style={{width: "28%"}}>
         <div className="w-11/12 h-2/5 pt-0 rounded-lg mb-4 bg-opacity-30 bg-white backdrop-blur-xl shadow-lg border border-white-300">
-            <div className='flex flex-row items-center justify-between text-center text-2xl font-bold text-black bg-opacity-10 bg-white backdrop-blur-xl p-2 rounded-t-lg mr-3'>
+            <div className='flex flex-row items-center justify-between text-center text-2xl font-bold text-black bg-opacity-10 bg-white backdrop-blur-xl p-2 rounded-t-lg'>
             <HeartIcon className="h-6 w-6 mr-2 mt-1 text-black hover:text-red-600"></HeartIcon>
             <h2 className="font-VenusRising text-xl">BPM</h2>
-            <h2 className="font-VenusRising text-lg">{heartRate[-1] ? heartRate[-1].value : 0}</h2>
+            <h2 className="font-VenusRising text-lg mr-3">{heartRate[-1] ? heartRate[-1].value : 0}</h2>
             </div>
           <Graph
             data={formatData(heartRate)}
