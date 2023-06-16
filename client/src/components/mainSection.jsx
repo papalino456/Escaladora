@@ -95,7 +95,7 @@ export default function MainSection() {
     <div className='h-screen w-8/12'>
       <div className='flex flex-row justify-between mt-8'>
         <h1 className='text-4xl font-bold mt-1 ml-8 font-VenusRising text-slate-900'>Dashboard</h1>
-        <UserCircleIcon className='h-12 w-12 mr-4 text-slate-900 justify-items-center'/>
+        <UserCircleIcon className='h-12 w-12 mr-4 -mt-1 text-slate-900 justify-items-center'/>
       </div>
       <div className="flex flex-col justify-center items-center font-VenusRising mx-auto ">
       <GradientSVG
@@ -121,7 +121,8 @@ export default function MainSection() {
       </div>
       <div className='flex flex-row justify-evenly '>
         <div className='flex flex-col justify-center text-center w-36'>
-          <h1 className='text-xl font-bold mt-1 font-VenusRising text-slate-900'>Steps</h1>
+          <h3 className='text-sm font-bold mt-1 font-VenusRising text-slate-900'>Total</h3>
+          <h1 className='text-xl font-bold -mt-1 font-VenusRising text-slate-900'>Steps</h1>
           <h1 className='text-4xl font-bold mt-1 font-VenusRising text-slate-900'>{distance}</h1>
         </div>
         <div className='flex flex-col justify-center text-center w-36'>
