@@ -23,7 +23,7 @@ export default {
       },
       fontFamily: {
         poppins: ['Poppins', 'sans-serif'],
-        VenusRising: ["Venus Rising", "cursive"],
+        VenusRising: ["Venus Rising", "sans-serif"],
       },
     },
   },

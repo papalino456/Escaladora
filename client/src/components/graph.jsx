@@ -3,12 +3,12 @@ import { AreaChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContai
 
 const Graph = ({ data, dataKey, stroke, stroke2, areaColor }) => {
     return (
-        <ResponsiveContainer width="100%" height="100%" margin="10">
+        <ResponsiveContainer width="100%" height="80%" margin="10">
           <AreaChart data={data}>
             <defs>
               <linearGradient id={areaColor} x1="0" y1="0" x2="0" y2="1">
                 <stop offset="5%" stopColor={stroke} stopOpacity={0.7} />
-                <stop offset="80%" stopColor={stroke2} stopOpacity={0} />
+                <stop offset="100%" stopColor={stroke2} stopOpacity={0} />
               </linearGradient>
             </defs>
             <Line

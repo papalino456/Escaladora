@@ -97,7 +97,7 @@ export default function MainSection() {
         <h1 className='text-4xl font-bold mt-1 ml-8 font-VenusRising text-slate-900'>Dashboard</h1>
         <UserCircleIcon className='h-12 w-12 mr-4 text-slate-900 justify-items-center'/>
       </div>
-      <div className="flex flex-col justify-center items-center mx-auto ">
+      <div className="flex flex-col justify-center items-center font-VenusRising mx-auto ">
       <GradientSVG
           startColor="#FF0000"
           endColor="#FFAA00"
@@ -107,27 +107,28 @@ export default function MainSection() {
       <CircularProgressbarWithChildren
         className='h-80 mt-12 -mb-8 text-orange-700'
         value={duration}
-        text={`${duration}s`}
+        text={duration}
         circleRatio={0.75}
         styles={buildStyles({
           rotation: 1 / 2 + 1 / 8,
           pathColor: `url(#myGradient)`,
           textColor: 'black',
+          textSize: '18px',
         })}
       >
         <h1 className='text-xl font-bold -mt-10 font-VenusRising text-slate-900'>Time</h1>
       </CircularProgressbarWithChildren>
       </div>
-      <div className='flex flex-row justify-evenly  '>
-        <div className='flex flex-col justify-center text-center'>
+      <div className='flex flex-row justify-evenly '>
+        <div className='flex flex-col justify-center text-center w-36'>
           <h1 className='text-xl font-bold mt-1 font-VenusRising text-slate-900'>Steps</h1>
           <h1 className='text-4xl font-bold mt-1 font-VenusRising text-slate-900'>{distance}</h1>
         </div>
-        <div className='flex flex-col justify-center text-center'>
+        <div className='flex flex-col justify-center text-center w-36'>
           <h1 className='text-xl font-bold mt-1 font-VenusRising text-slate-900'>Calories</h1>
           <div className='flex flex-row justify-center text-center '>
             <h1 className='text-4xl font-bold mt-1 font-VenusRising text-slate-900 ml-4'>{caloriesBurnt}</h1>
-            <h1 className='text-sm font-bold mt-1 font-VenusRising text-slate-900'>Kcal</h1>
+            <h1 className='text-xs font-bold mt-1 font-VenusRising text-slate-900'>cal</h1>
           </div>
         </div>
       </div>
