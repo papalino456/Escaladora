@@ -13,7 +13,7 @@ const FriendsPage = () => {
   useEffect(() => {
     if (data === null) {
       const userExercisesRef = collection(db, "users", userId, "exercises");
-      const q = query(userExercisesRef, orderBy("date", "desc"), limit(1));
+      const q = query(userExercisesRef, orderBy("date", "desc"), limit(5));
       const unsubscribe = onSnapshot(q, (querySnapshot) => {
         querySnapshot.forEach((doc) => {
           if (doc.exists) {
@@ -32,7 +32,7 @@ const FriendsPage = () => {
     <div className='flex flex-auto flex-col w-8/12'>
       <div className='flex grow max-h-24 flex-initial items-center justify-between '>
         <div className='flex mt-3'> 
-          <h1 className='text-4xl font-bold mt-1 ml-8 font-VenusRising text-slate-900'>Friends Page</h1> 
+          <h1 className='text-4xl font-bold mt-1 ml-8 font-VenusRising text-slate-900'>ajjaja xd</h1> 
         </div>
         <div className="flex items-center justify-center " >
           <img src='\assets\profile.jpg' className='object-cover h-16 w-16 rounded-full mx-8 border-2 border-slate-700'></img>
