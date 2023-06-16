@@ -22,7 +22,7 @@ const Graph = ({ data, dataKey, stroke, stroke2, areaColor }) => {
               fillOpacity={1}
               areaColor={areaColor}
             />
-            <Area type="" dataKey={dataKey} dot={false} stroke={stroke} fillOpacity={1} fill={`url(#${areaColor})`} animationDuration={500} />
+            <Area type="" dataKey={dataKey} dot={false} stroke={stroke} fillOpacity={1} fill={`url(#${areaColor})`} animationDuration={1000} />
           </AreaChart>
         </ResponsiveContainer>
       );

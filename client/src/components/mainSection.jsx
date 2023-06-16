@@ -2,6 +2,9 @@ import {React, useEffect, useState} from 'react';
 import { UserCircleIcon } from '@heroicons/react/24/outline'; '@heroicons/react/24/outline';
 import db from  '../firebase';
 import { collection, doc, onSnapshot, query, orderBy, limit } from 'firebase/firestore';
+import { CircularProgressbarWithChildren, buildStyles } from 'react-circular-progressbar';
+import GradientSVG from './gradientSVG';
+import 'react-circular-progressbar/dist/styles.css';
 
 async function startExercise() {
   try {
@@ -95,12 +98,30 @@ export default function MainSection() {
         <UserCircleIcon className='h-12 w-12 mr-4 text-slate-900 justify-items-center'/>
       </div>
       <div className="flex flex-col justify-center items-center mx-auto ">
-        <img src='/assets/mesh.png' className='h-56 w-10/12 rounded-2xl mt-5' ></img>
+      <GradientSVG
+          startColor="#FF0000"
+          endColor="#FFAA00"
+          idCSS="myGradient"
+          rotation={0}
+        />
+      <CircularProgressbarWithChildren
+        className='h-80 mt-12 -mb-8 text-orange-700'
+        value={duration}
+        text={`${duration}s`}
+        circleRatio={0.75}
+        styles={buildStyles({
+          rotation: 1 / 2 + 1 / 8,
+          pathColor: `url(#myGradient)`,
+          textColor: 'black',
+        })}
+      >
+        <h1 className='text-xl font-bold -mt-10 font-VenusRising text-slate-900'>Time</h1>
+      </CircularProgressbarWithChildren>
       </div>
-      <div className='flex flex-row justify-evenly mt-12 '>
+      <div className='flex flex-row justify-evenly  '>
         <div className='flex flex-col justify-center text-center'>
-          <h1 className='text-xl font-bold mt-1 font-VenusRising text-slate-900'>Time</h1>
-          <h1 className='text-4xl font-bold mt-1 font-VenusRising text-slate-900'>{duration}</h1>
+          <h1 className='text-xl font-bold mt-1 font-VenusRising text-slate-900'>Steps</h1>
+          <h1 className='text-4xl font-bold mt-1 font-VenusRising text-slate-900'>{distance}</h1>
         </div>
         <div className='flex flex-col justify-center text-center'>
           <h1 className='text-xl font-bold mt-1 font-VenusRising text-slate-900'>Calories</h1>
@@ -110,7 +131,7 @@ export default function MainSection() {
           </div>
         </div>
       </div>
-      <div className="flex flex-col justify-center text-center w-3/12 mx-auto mt-10">
+      <div className="flex flex-col justify-center text-center w-3/12 mx-auto mt-8">
           <button
             onClick={handleStartStopExercise}
             className={`text-white font-bold px-4 py-2 rounded-lg shadow-lg ${
