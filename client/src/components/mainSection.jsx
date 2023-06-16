@@ -107,8 +107,9 @@ export default function MainSection() {
       <CircularProgressbarWithChildren
         className='h-80 mt-12 -mb-8 text-orange-700'
         value={duration}
-        text={duration}
+        text={`${Math.floor(duration/60).toString().padStart(2,'0')}:${(duration%60).toString().padStart(2,'0')}`}
         circleRatio={0.75}
+        maxValue={600}
         styles={buildStyles({
           rotation: 1 / 2 + 1 / 8,
           pathColor: `url(#myGradient)`,
